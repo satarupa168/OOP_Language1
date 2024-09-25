@@ -1,0 +1,39 @@
+//Write a C++ program that will create a class which will calculate the area of triangle, reactangle and circle having the same name.
+#include <iostream>
+#include <cmath>
+
+class Shape {
+public:
+    double area(double base, double height) {
+        return (0.5 * base * height);
+    }
+
+    double area(float length, float breadth) {
+        return (length * breadth);
+    }
+
+    double area(double radius) {
+        return M_PI * radius * radius; 
+    }
+};
+
+int main() {
+    Shape shape;
+
+    double triangleBase, triangleHeight;
+    std::cout << "Enter base and height of the triangle in metres: ";
+    std::cin >> triangleBase >> triangleHeight;
+    std::cout << "Area of Triangle: " << shape.area(triangleBase, triangleHeight) << " sq. metres"<< std::endl;
+
+    float rectangleLength, rectangleBreadth;
+    std::cout << "Enter length and breadth of the rectangle in metres: ";
+    std::cin >> rectangleLength >> rectangleBreadth;
+    std::cout << "Area of Rectangle: " << shape.area(rectangleLength, rectangleBreadth) << " sq. metres"<< std::endl;
+
+    double circleRadius;
+    std::cout << "Enter radius of the circle in metres: ";
+    std::cin >> circleRadius;
+    std::cout << "Area of Circle: " << shape.area(circleRadius) << " sq. metres "<<std::endl;
+
+    return 0;
+}
