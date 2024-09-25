@@ -1,0 +1,14 @@
+//Write a C++ program to calculate the simple interest where the rate of interest has a default value of 15%.
+#include<iostream>
+using namespace std;
+int main()
+{
+float rate=0.15;
+float si, time, p_amt,r;
+cout<<"Enter the principal amount and the time of interest in years and the rate of interest"<<endl;
+cin>>p_amt;
+cin>>time;
+cin>>r;
+si=(p_amt*r*time)/100.0;
+cout<<"The simple interest for the given principal amount of "<<p_amt<<" for a period of "<<time<<" years is "<<si<<endl;
+}
