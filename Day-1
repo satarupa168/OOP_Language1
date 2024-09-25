@@ -1,0 +1,108 @@
+//Write a C++ menu_driven program to implement ATM System(where account number,account name and balance are taken in private, and withdrawal(),view_balance(),transfer() are also taken in private and pin is taken in public).
+#include <iostream>
+#include <iostream>
+#include <string>
+
+class ATM {
+private:
+    std::string accountNumber;
+    std::string accountName;
+    double balance;
+    int pin;
+
+    void withdrawal() {
+        double amount;
+        std::cout << "Enter amount to withdraw: ";
+        std::cin >> amount;
+        if (amount <= balance) {
+            balance -= amount;
+            std::cout << "Withdrawal successful. New balance: " << balance << std::endl;
+        } else {
+            std::cout << "Insufficient balance." << std::endl;
+        }
+    }
+
+    void view_balance() {
+        std::cout << "Current balance: " << balance << std::endl;
+    }
+
+    void transfer() {
+        char type;
+        double amount;
+        std::cout << "Enter 'C' for credit or 'D' for debit: ";
+        std::cin >> type;
+        std::cout << "Enter amount: ";
+        std::cin >> amount;
+
+        if (type == 'C' || type == 'c') {
+            balance += amount;
+            std::cout << "Amount credited. New balance: " << balance << std::endl;
+        } else if (type == 'D' || type == 'd') {
+            if (amount <= balance) {
+                balance -= amount;
+                std::cout << "Amount debited. New balance: " << balance << std::endl;
+            } else {
+                std::cout << "Insufficient balance." << std::endl;
+            }
+        } else {
+            std::cout << "Invalid transaction type." << std::endl;
+        }
+    }
+
+public:
+    void setDetails() {
+        std::cout << "Enter account number: ";
+        std::cin >> accountNumber;
+        std::cout << "Enter account name: ";
+        std::cin >> accountName;
+        std::cout << "Enter initial balance: ";
+        std::cin >> balance;
+        std::cout << "Set your PIN: ";
+        std::cin >> pin;
+    }
+
+    void menu() {
+        int choice;
+        int enteredPin;
+        std::cout << "Enter your PIN: ";
+        std::cin >> enteredPin;
+
+        if (enteredPin == pin) {
+            do {
+                std::cout << "\nATM Menu:\n";
+                std::cout << "1. View Balance\n";
+                std::cout << "2. Withdraw\n";
+                std::cout << "3. Transfer\n";
+                std::cout << "4. Exit\n";
+                std::cout << "Enter your choice: ";
+                std::cin >> choice;
+
+                switch (choice) {
+                    case 1:
+                        view_balance();
+                        break;
+                    case 2:
+                        withdrawal();
+                        break;
+                    case 3:
+                        transfer();
+                        break;
+                    case 4:
+                        std::cout << "Exiting...\n";
+                        break;
+                    default:
+                        std::cout << "Invalid choice. Please try again.\n";
+                }
+            } while (choice != 4);
+        } else {
+            std::cout << "Incorrect PIN. Access denied.\n";
+        }
+    }
+};
+
+int main() {
+    ATM atm;
+    atm.setDetails();
+    atm.menu();
+    return 0;
+}
