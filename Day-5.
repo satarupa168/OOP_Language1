@@ -1,0 +1,92 @@
+//Write a C++ program to implement hybrid inheritance with respect to the university examination system.
+#include <iostream>
+using namespace std;
+class Person {
+protected:
+    string name;
+    int age;
+public:
+    void setPersonDetails(string n, int a) {
+        name = n;
+        age = a;
+    }
+    void showPersonDetails() {
+        cout << "Name: " << name << "\nAge: " << age << endl;
+    }
+};
+class Student : public Person {
+protected:
+    int studentID;
+public:
+    void setStudentDetails(string n, int a, int id) {
+        setPersonDetails(n, a);
+        studentID = id;
+    }
+    void showStudentDetails() {
+        showPersonDetails();
+        cout << "Student ID: " << studentID << endl;
+    }
+};
+class Undergraduate : public Student {
+protected:
+    string undergradCourse;
+public:
+    void setUndergradDetails(string n, int a, int id, string course) {
+        setStudentDetails(n, a, id);
+        undergradCourse = course;
+    }
+    void showUndergradDetails() {
+        showStudentDetails();
+        cout << "Undergraduate Course: " << undergradCourse << endl;
+    }
+};
+class Graduate : public Student {
+protected:
+    string gradCourse;
+public:
+    void setGradDetails(string n, int a, int id, string course) {
+        setStudentDetails(n, a, id);
+        gradCourse = course;
+    }
+    void showGradDetails() {
+        showStudentDetails();
+        cout << "Graduate Course: " << gradCourse << endl;
+    }
+};
+class Exam : public Undergraduate, public Graduate {
+public:
+    void setExamDetails(string undergradName, int undergradAge, int undergradID, string undergradCourse,
+                        string gradName, int gradAge, int gradID, string gradCourse) {
+        setUndergradDetails(undergradName, undergradAge, undergradID, undergradCourse);
+        setGradDetails(gradName, gradAge, gradID, gradCourse);
+    }
+    void showExamDetails() {
+        showUndergradDetails();
+        showGradDetails();
+    }
+};
+int main() {
+    Exam exam;
+    string undergradName, gradName, undergradCourse, gradCourse;
+    int undergradAge, gradAge, undergradID, gradID;
+    cout << "Enter Undergraduate Student Name: ";
+    cin >> undergradName;
+    cout << "Enter Undergraduate Student Age: ";
+    cin >> undergradAge;
+    cout << "Enter Undergraduate Student ID: ";
+    cin >> undergradID;
+    cout << "Enter Undergraduate Course: ";
+    cin >> undergradCourse;
+    cout << "Enter Graduate Student Name: ";
+    cin >> gradName;
+    cout << "Enter Graduate Student Age: ";
+    cin >> gradAge;
+    cout << "Enter Graduate Student ID: ";
+    cin >> gradID;
+    cout << "Enter Graduate Course: ";
+    cin >> gradCourse;
+    exam.setExamDetails(undergradName, undergradAge, undergradID, undergradCourse,
+                        gradName, gradAge, gradID, gradCourse);
+    exam.showExamDetails();
+    return 0;
+}
